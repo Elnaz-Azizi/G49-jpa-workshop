@@ -18,4 +18,6 @@ public interface AppUserRepository extends JpaRepository<AppUser, Integer> {
     Optional<AppUser> findByUserDetails_Id(int detailsId);
 
     Optional<AppUser> findByUserDetails_EmailIgnoreCase(String email);
+
+
 }

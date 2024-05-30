@@ -35,5 +35,7 @@ public class AppUser {
         this.password = password;
         this.regDate = LocalDate.now();
     }
+
+
 }
 
