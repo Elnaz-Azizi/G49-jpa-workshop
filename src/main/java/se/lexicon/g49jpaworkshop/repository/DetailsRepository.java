@@ -2,7 +2,7 @@ package se.lexicon.g49jpaworkshop.repository;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
-import se.lexicon.g49jpaworkshop.model.Details;
+import se.lexicon.g49jpaworkshop.entity.Details;
 
 import java.util.List;
 import java.util.Optional;
