@@ -6,6 +6,8 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import java.time.LocalDate;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
 
@@ -30,12 +32,24 @@ public class AppUser {
     @JoinColumn(name = "details_id", referencedColumnName = "id")
     private Details userDetails;
 
+    @OneToMany(mappedBy = "borrower", cascade = CascadeType.ALL, orphanRemoval = true)
+    private Set<BookLoan> bookLoans = new HashSet<>();
+
+
     public AppUser(String username, String password) {
         this.username = username;
         this.password = password;
         this.regDate = LocalDate.now();
     }
 
+    public void addBookLoan(BookLoan bookLoan) {
+        bookLoans.add(bookLoan);
+        bookLoan.setBorrower(this);
+    }
 
+    public void removeBookLoan(BookLoan bookLoan) {
+        bookLoans.remove(bookLoan);
+        bookLoan.setBorrower(null);
+    }
 }
 
