@@ -25,6 +25,9 @@ public class Book {
     private String title;
     private int maxLoanDays;
 
+    @Column(nullable = false)
+    private boolean available = true;
+
     @OneToMany(mappedBy = "book")
     private Set<BookLoan> bookLoans= new HashSet<>();
 
@@ -51,5 +54,13 @@ public class Book {
         this.authors.remove(author);
         author.getBooks().remove(this);
     }
-
+    public void addBookLoan(BookLoan bookLoan) {
+        if (this.available) {
+            this.bookLoans.add(bookLoan);
+            bookLoan.setBook(this);
+            this.available = false;
+        } else {
+            throw new IllegalStateException("Book is not available for loan.");
+        }
+    }
 }
